@@ -1,4 +1,4 @@
-import './Titlecard.css'
+import './TitleCard.css'
 
 
 export const TitleCard = ({ title, image, onClick }) => {
