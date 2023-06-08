@@ -1,6 +1,7 @@
 .titlecard {
   display: flex;
   flex-direction: column;
+  height: 330px;
   justify-content: space-between;
 }
 

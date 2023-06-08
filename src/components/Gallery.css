@@ -1,11 +1,34 @@
+.filter-year-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 0;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.filter-year-container label {
+  font-size: 20px;
+  margin-right: 10px;
+  padding-top: 20px;
+}
+
+.filter-year {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
 .titles-gallery {
   max-width: 1024px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 20px;
   padding: 40px 20px;
   box-sizing: border-box;
+  min-height: calc(100vh - 340px);
 }
 
 .modal-backdrop {
