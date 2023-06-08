@@ -21,4 +21,4 @@ para instalar todas las dependencia. Despues para iniciar el proyecto
 npm run dev
 ~~~
 
-Lo he subido a netlify para tenerlo desplegado en este link 
+El proyecto se desplegará en uno de los puertos del LocalHost y ya solo queda abrirlo
