@@ -1,0 +1,22 @@
+.card {
+  width: 150px;
+  height: 300px;
+}
+
+.card-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 270px;
+  background: url('../../assets/placeholder.png');
+  background-color: rgb(39, 35, 35);
+  background-size: auto 70%;
+  background-position: center;
+}
+
+.card-background {
+  color: white;
+  text-align: center
+  ;
+}

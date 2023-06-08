@@ -1,0 +1,30 @@
+.footer {
+  color: rgb(223, 217, 217);
+  background-color: rgb(46, 46, 46);
+  padding: 20px;
+}
+
+.footer-terms {
+  font-size: 12px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.footer-copyright {
+  font-size: 10px;
+  margin-bottom: 30px;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  gap: 20px;
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
