@@ -8,11 +8,12 @@
   justify-content: center;
   align-items: center;
   width: 150px;
-  height: 270px;
+  height: 220px;
   background: url('../../assets/placeholder.png');
   background-color: rgb(39, 35, 35);
   background-size: auto 70%;
   background-position: center;
+  cursor: pointer;
 }
 
 .card-background {

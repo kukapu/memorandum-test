@@ -5,9 +5,11 @@ En el primer commit no he podido acabar. Me falta los estilos para resoluciones 
 
 Voy a seguir para acabarlo y dejarlo un poco mejor y rellenar correctamente el readme.
 
+Segundo commit con todo lo básico implementado. Estilos acabados (con mobile-first). Manejo de carga y error. Faltan los test y las cosas opcionales. Continuare con ellas después.
+
 ## INICIAR EL PROYECTO
 
-Puedes descargarlo o clonarlo. Una vez dentro del directorio usar el comando 
+Puedes descargar o clonar el repositorio. Una vez dentro del directorio usar los siguientes comandos en la terminal:
 
 ~~~
 npm install

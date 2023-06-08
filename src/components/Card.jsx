@@ -14,9 +14,9 @@ export const Card = ({ title }) => {
   return (
   
     <div className='card'>
-      <div className='card-background'>
+      <div className='card-background' onClick={handleClick}>
 
-          <h2 onClick={handleClick}> { title.toUpperCase() } </h2>
+          <h2> { title.toUpperCase() } </h2>
        
       </div>
       <p>Popular { title }</p>

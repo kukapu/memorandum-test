@@ -2,6 +2,8 @@
   color: rgb(223, 217, 217);
   background-color: rgb(46, 46, 46);
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-terms {
@@ -18,7 +20,7 @@
 .footer-icons {
   display: flex;
   flex-direction: column;
-  width: 100px;
+  justify-content: flex-end;
   gap: 20px;
 }
 
@@ -28,3 +30,34 @@
   gap: 20px;
 }
 
+.footer-stores {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .footer-maxwidth {
+    max-width: 1024px;
+    margin: 0px auto;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .footer-icons {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .footer-stores {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 12px;
+  }
+
+}

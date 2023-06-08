@@ -1,11 +1,14 @@
 import './Titlecard.css'
 
 
-export const TitleCard = ({ title, image }) => {
+export const TitleCard = ({ title, image, onClick }) => {
   return (
     <div className="titlecard">
       <img src={image} alt={title} />
-      <h3>{title}</h3>
+      <h3 onClick={ (e) => {
+        e.stopPropagation();
+        onClick();
+      }}>{title}</h3>
     </div>
   )
 }
