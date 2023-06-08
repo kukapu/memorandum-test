@@ -1,4 +1,4 @@
-import './titlecard.css'
+import './Titlecard.css'
 
 
 export const TitleCard = ({ title, image }) => {
