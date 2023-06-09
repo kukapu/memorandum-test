@@ -11,14 +11,14 @@ export const navRoutes = [
     name: 'HOME'
   },
   {
-    to: '/movies',
-    path: 'movies',
+    to: '/movie',
+    path: 'movie/:page?',
     Component: Movies,
-    name: 'Movies'
+    name: 'Movie'
   },
   {
     to: '/series',
-    path: 'series',
+    path: 'series/:page?',
     Component: Series,
     name: 'Series'
   },

@@ -7,7 +7,8 @@ export const Card = ({ title }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const path = `/${title.toLowerCase()}`;
+    const path = `/${title.toLowerCase()}/1`;
+    
     navigate(path);
   }
 

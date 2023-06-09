@@ -5,7 +5,7 @@ export const Home = () => {
   return (
     <div className='card-container'>
       <Card title='Series' />
-      <Card title='Movies' />
+      <Card title='Movie' />
     </div>
   )
 }

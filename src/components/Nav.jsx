@@ -29,7 +29,7 @@ export const Nav = () => {
 
       <div className='header-second-background'>
         <div className='header-second'>
-          <h2> Popular { capitalizeFirstLetter(pathname.slice(1)) } </h2>
+          <h2> Popular { capitalizeFirstLetter(pathname.slice(1).split('/')[0]) } </h2>
         </div>
       </div>
     </header>

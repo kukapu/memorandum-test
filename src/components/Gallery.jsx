@@ -1,6 +1,7 @@
 import { TitleCard } from './TitleCard';
 import './Gallery.css'
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -12,6 +13,11 @@ export const Gallery = ({ type }) => {
   const [error, setError] = useState(false);
   const [allYears, setAllYears] = useState([])
   const [selectedYear, setSelectedYear] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const { page } = useParams();
+  const navigate = useNavigate();
   
   const getData = async () => {
     setIsLoading(true);
@@ -29,9 +35,9 @@ export const Gallery = ({ type }) => {
             return entry.releaseYear
           }
         })
-        const uniqueYears = [...new Set(years)]
+        const uniqueYears = [...new Set(years)].sort((a, b) => b - a)
         setAllYears(uniqueYears)
-        data.entries = data.entries.filter((entry) => entry.programType === type && entry.releaseYear >= 2010).sort((a, b) => a.title.localeCompare(b.title)).slice(0, 20)
+        data.entries = data.entries.filter((entry) => entry.programType === type && entry.releaseYear >= 2010).sort((a, b) => a.title.localeCompare(b.title))
         setTypeData(data.entries)
       })
       .catch(error => console.log(error))
@@ -58,6 +64,8 @@ export const Gallery = ({ type }) => {
   
   const onYearChange = (e) => {
     setSelectedYear(e.target.value);
+    setCurrentPage(1);
+    navigate(`/${type}/1`)
   };
 
 
@@ -69,6 +77,9 @@ export const Gallery = ({ type }) => {
     }
   }, [selectedYear]);
 
+  useEffect(() => {
+    setCurrentPage(Number(page) || 1);  
+  }, [page]);
 
   const handleOpenModal = (movie) => {
     setModalData(movie);
@@ -77,10 +88,24 @@ export const Gallery = ({ type }) => {
   const handleCloseModal = () => {
     setModalData(null);
   }
-  
+
+  const getTotalPages = () => {
+    return Math.ceil(typeData.length / itemsPerPage);
+  };
+
+  const handleChangePage = (newPage) => {
+    setCurrentPage(newPage);
+    navigate(`/${type}/${newPage}`)
+  };
+
+  const handleChangeItemsPerPage = (e) => {
+    setItemsPerPage(e.target.value);
+    setCurrentPage(1); 
+  };
 
   return (
-    <div>
+    
+    <div className='gallery'>
       <div className='filter-year-container'>
         <label htmlFor="year">Busqueda por año:  </label>
         <select className='filter-year' name="year" value={selectedYear} onChange={ onYearChange }>
@@ -111,12 +136,12 @@ export const Gallery = ({ type }) => {
           )
         }
         {
-          error && <h1>Oops, something went wrong...</h1>
+          error && <p>Oops, something went wrong...</p>
         }
         {
-          isLoading ? <h1>Loading...</h1>
+          isLoading ? <p>Loading...</p>
           : (
-            typeData?.map((movie, index) => {
+            typeData?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((movie, index) => {
               return (
                 <TitleCard
                   key={index}
@@ -129,6 +154,30 @@ export const Gallery = ({ type }) => {
           )
         }
       </div>
+      {
+        !isLoading && (
+          <div className='gallery-pages'>
+            <div className='gallery-pages-none'></div>
+            <div className='gallery-pages-nav'>
+              <button onClick={() => handleChangePage(currentPage - 1)} disabled={currentPage === 1}>
+                Prev
+              </button>
+              <span> Page { currentPage} of {getTotalPages() } </span>
+              <button onClick={() => handleChangePage(currentPage + 1)} disabled={currentPage === getTotalPages()}>
+                Next
+              </button>
+            </div>
+            <div className='gallery-pages-pp'>
+              <label>Items per page: </label>
+              <select value={itemsPerPage} onChange={handleChangeItemsPerPage}>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+          </div>
+        )
+      }
     </div>
   )
 }
