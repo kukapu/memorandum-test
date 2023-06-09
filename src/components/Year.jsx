@@ -13,16 +13,16 @@ export const Year = ({ allYears, selectedYear, setSelectedYear, type, setCurrent
 
   return (
     <div className='filter-year-container'>
-    <label htmlFor="year">Busqueda por año:  </label>
-    <select className='filter-year' name="year" value={selectedYear} onChange={ onYearChange }>
-      <option value=""  disabled>Seleccione año</option>
-      {allYears.map((year, index) => (
-        <option key={index} value={year}>
-          {year}
-        </option>
-      ))}
-    </select>
-  </div>
+      <label htmlFor="year">Busqueda por año:  </label>
+      <select className='filter-year' name="year" value={selectedYear} onChange={ onYearChange }>
+        <option value=""  disabled selected>Seleccione año</option>
+        {allYears.map((year, index) => (
+          <option key={index} value={year}>
+            {year}
+          </option>
+        ))}
+      </select>
+    </div>
   )
 }
 

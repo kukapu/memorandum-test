@@ -39,38 +39,21 @@ export const Gallery = ({ type }) => {
         })
         const uniqueYears = [...new Set(years)].sort((a, b) => b - a)
         setAllYears(uniqueYears)
-        data.entries = data.entries.filter((entry) => entry.programType === type && entry.releaseYear >= 2010).sort((a, b) => a.title.localeCompare(b.title))
-        setTypeData(data.entries)
-      })
-      .catch(error => console.log(error))
-      .finally(() => setIsLoading(false))
-  }
 
-  const getYears = async () => {
-    setIsLoading(true);
-    await fetch('../../data/sample.json')
-      .then(response => {
-        if (response.ok) {
-          return response.json()
+        if(selectedYear){
+          data.entries = data.entries.filter((entry) => entry.programType === type && entry.releaseYear == selectedYear).sort((a, b) => a.title.localeCompare(b.title)).slice(0, 20)
+          setTypeData(data.entries)
+        } else {
+          data.entries = data.entries.filter((entry) => entry.programType === type && entry.releaseYear >= 2010).sort((a, b) => a.title.localeCompare(b.title))
+          setTypeData(data.entries)
         }
-        setError(true)
-        throw new Error(`HTTP error! status: ${response.status}`)
-      })
-      .then(data => {
-        data.entries = data.entries.filter((entry) => entry.programType === type && entry.releaseYear == selectedYear).sort((a, b) => a.title.localeCompare(b.title)).slice(0, 20)
-        setTypeData(data.entries)
       })
       .catch(error => console.log(error))
       .finally(() => setIsLoading(false))
   }
   
-
   useEffect(() => {
-    if (selectedYear) {
-      getYears();
-    } else {
-      getData();
-    }
+    getData();
   }, [selectedYear]);
 
   useEffect(() => {
