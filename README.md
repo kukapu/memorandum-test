@@ -11,6 +11,8 @@ Segundo commit con todo lo básico implementado. Estilos acabados (con mobile-fi
 
 Tercer commit con el añadido de las implementaciones opcionales. Falta arreglar un poco el componente Gallery.jsx que tiene demasiada logica junta y se pueden separar algunas cosas todavia en componentes mas pequeños. Tambien falta el testing.
 
+Cuarto commit donde solo falta el testing.
+
 
 ## INICIAR EL PROYECTO
 
