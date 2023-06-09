@@ -1,7 +1,10 @@
 import { TitleCard } from './TitleCard';
 import './Gallery.css'
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Pages } from './Pages';
+import { Modal } from './Modal';
+import { Year } from './Year';
 
 
 
@@ -17,7 +20,6 @@ export const Gallery = ({ type }) => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const { page } = useParams();
-  const navigate = useNavigate();
   
   const getData = async () => {
     setIsLoading(true);
@@ -62,12 +64,6 @@ export const Gallery = ({ type }) => {
       .finally(() => setIsLoading(false))
   }
   
-  const onYearChange = (e) => {
-    setSelectedYear(e.target.value);
-    setCurrentPage(1);
-    navigate(`/${type}/1`)
-  };
-
 
   useEffect(() => {
     if (selectedYear) {
@@ -89,51 +85,20 @@ export const Gallery = ({ type }) => {
     setModalData(null);
   }
 
-  const getTotalPages = () => {
-    return Math.ceil(typeData.length / itemsPerPage);
-  };
-
-  const handleChangePage = (newPage) => {
-    setCurrentPage(newPage);
-    navigate(`/${type}/${newPage}`)
-  };
-
-  const handleChangeItemsPerPage = (e) => {
-    setItemsPerPage(e.target.value);
-    setCurrentPage(1); 
-  };
-
   return (
     
     <div className='gallery'>
-      <div className='filter-year-container'>
-        <label htmlFor="year">Busqueda por año:  </label>
-        <select className='filter-year' name="year" value={selectedYear} onChange={ onYearChange }>
-          <option value=""  disabled>Seleccione año</option>
-          {allYears.map((year, index) => (
-            <option key={index} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Year 
+        allYears={allYears} s
+        electedYear={selectedYear} 
+        setSelectedYear={setSelectedYear} 
+        setCurrentPage={setCurrentPage} 
+        type={type} 
+      />
       <div className='titles-gallery' onClick={ handleCloseModal } >
         
         {
-          modalData && (
-            <div className='modal-backdrop'>
-              
-              <div className='modal'>
-                <div className='modal-content'>
-                  <img src={modalData.images['Poster Art'].url} alt={modalData.title} />
-                  <div className='modal-info'>
-                    <h2>{modalData.title}<span> ({modalData.releaseYear})</span></h2>
-                    <p>{modalData.description}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
+          modalData && <Modal modalData={ modalData } />
         }
         {
           error && <p>Oops, something went wrong...</p>
@@ -155,28 +120,14 @@ export const Gallery = ({ type }) => {
         }
       </div>
       {
-        !isLoading && (
-          <div className='gallery-pages'>
-            <div className='gallery-pages-none'></div>
-            <div className='gallery-pages-nav'>
-              <button onClick={() => handleChangePage(currentPage - 1)} disabled={currentPage === 1}>
-                Prev
-              </button>
-              <span> Page { currentPage} of {getTotalPages() } </span>
-              <button onClick={() => handleChangePage(currentPage + 1)} disabled={currentPage === getTotalPages()}>
-                Next
-              </button>
-            </div>
-            <div className='gallery-pages-pp'>
-              <label>Items per page: </label>
-              <select value={itemsPerPage} onChange={handleChangeItemsPerPage}>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-              </select>
-            </div>
-          </div>
-        )
+        !isLoading && <Pages
+                        itemsPerPage={itemsPerPage}
+                        setItemsPerPage={setItemsPerPage}
+                        typeData={typeData}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        type={type}
+                      />
       }
     </div>
   )
