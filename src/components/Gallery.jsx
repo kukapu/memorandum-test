@@ -1,5 +1,5 @@
-import { TitleCard } from './TitleCard';
 import './Gallery.css'
+import { TitleCard } from './TitleCard';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Pages } from './Pages';
@@ -33,11 +33,13 @@ export const Gallery = ({ type }) => {
       })
       .then(data => {
         const years = data.entries.map(entry => {
-          if (entry.programType === type) {
+          if (entry.programType === type && entry.releaseYear >= 1900) {
             return entry.releaseYear
           }
+          return null
         })
-        const uniqueYears = [...new Set(years)].sort((a, b) => b - a)
+
+        const uniqueYears = [...new Set(years)].sort((a, b) => b - a).filter(year => year !== null)
         setAllYears(uniqueYears)
 
         if(selectedYear){
@@ -48,7 +50,7 @@ export const Gallery = ({ type }) => {
           setTypeData(data.entries)
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => console.error(error))
       .finally(() => setIsLoading(false))
   }
   

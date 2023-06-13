@@ -15,7 +15,7 @@ export const Year = ({ allYears, selectedYear, setSelectedYear, type, setCurrent
     <div className='filter-year-container'>
       <label htmlFor="year">Busqueda por año:  </label>
       <select className='filter-year' name="year" value={selectedYear} onChange={ onYearChange }>
-        <option value=""  disabled selected>Seleccione año</option>
+        <option value=""  disabled>Seleccione año</option>
         {allYears.map((year, index) => (
           <option key={index} value={year}>
             {year}
