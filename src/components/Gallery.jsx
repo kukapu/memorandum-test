@@ -50,7 +50,7 @@ export const Gallery = ({ type }) => {
           setTypeData(data.entries)
         }
       })
-      .catch(error => console.error(error))
+      .catch(error => console.log(error))
       .finally(() => setIsLoading(false))
   }
   
@@ -72,7 +72,7 @@ export const Gallery = ({ type }) => {
 
   return (
     
-    <div className='gallery'>
+    <section className='gallery'>
       <Year 
         allYears={allYears} s
         electedYear={selectedYear} 
@@ -114,7 +114,7 @@ export const Gallery = ({ type }) => {
                         type={type}
                       />
       }
-    </div>
+    </section>
   )
 }
 
